@@ -37,7 +37,7 @@ export const Sidebar = ({
      */
     const defaultAccordionValue: string[] = Object.keys(expanded)
         .reduce((acc: string[], key: string) => {
-            if (expanded[key]) {
+            if (expanded && expanded[key]) {
                 acc.push(key);
             }
             return acc;
