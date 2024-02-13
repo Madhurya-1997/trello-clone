@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import { Information } from "./_components/Information";
 import { BoardList } from "./_components/BoardList";
+import { Suspense } from "react";
 
 export default function OrganizationIdPage() {
 
@@ -10,7 +11,10 @@ export default function OrganizationIdPage() {
             <Separator className="my-4" />
 
             <div className="px-2 md:px-4">
-                <BoardList />
+
+                <Suspense fallback={<BoardList.Skeleton />}>
+                    <BoardList />
+                </Suspense>
             </div>
         </div>
     )
