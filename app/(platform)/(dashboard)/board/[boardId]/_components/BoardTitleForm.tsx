@@ -23,7 +23,7 @@ export const BoardTitleForm = ({
             disableEditing();
         },
         onError: (error) => {
-            toast.error("Failed to update board title");
+            toast.error(error);
         }
     })
 
