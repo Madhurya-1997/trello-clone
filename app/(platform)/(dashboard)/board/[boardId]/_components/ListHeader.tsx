@@ -63,6 +63,7 @@ export const ListHeader = ({
 
         if (title === data.title) {
             disableEditing();
+            return;
         }
 
         execute({ title, boardId, id });

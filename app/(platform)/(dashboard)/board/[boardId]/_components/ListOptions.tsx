@@ -24,13 +24,20 @@ export const ListOptions = ({
 }: ListOptionsProps) => {
 
     const { execute } = useAction(deleteList, {
-        onSuccess: () => {
-            toast.success(`List deleted successfully`);
+        onSuccess: (data) => {
+            toast.success(`List "${data.title}"deleted`);
         },
         onError: (err) => {
-            toast.error("Failed to delete list");
+            toast.error(err);
+            console.error(err);
         }
     })
+
+    const onDeleteList = (formData: FormData) => {
+        const id = formData.get("id") as string;
+        const boardId = formData.get("boardId") as string;
+        execute({ id, boardId });
+    }
 
     return (
         <Popover>
@@ -62,9 +69,9 @@ export const ListOptions = ({
                     </FormSubmit>
                 </form>
                 <Separator />
-                <form>
-                    <input hidden name="id" id="id" value={data.id} />
-                    <input hidden name="boardId" id="boardId" value={data.boardId} />
+                <form action={onDeleteList}>
+                    <input hidden name="id" id="id" value={data.id} onChange={() => { }} />
+                    <input hidden name="boardId" id="boardId" value={data.boardId} onChange={() => { }} />
 
                     <FormSubmit variant="ghost" className="rounded-none h-auto w-full p-2 px-5 justify-start font-normal text-sm">
                         Delete list
