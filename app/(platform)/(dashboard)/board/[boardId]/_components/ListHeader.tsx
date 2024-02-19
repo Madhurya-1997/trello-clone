@@ -5,20 +5,22 @@ import { useAction } from "@/hooks/useAction";
 import { List } from "@prisma/client"
 import { useParams } from "next/navigation";
 
-import { useState, useRef, ElementRef, KeyboardEvent } from "react";
+import { useState, useRef, ElementRef, KeyboardEvent, KeyboardEventHandler } from "react";
 import { toast } from "sonner";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 import { ListOptions } from "./ListOptions";
 
 interface ListHeaderProps {
     data: List;
+    onAddCard: () => void;
 }
 
 export const ListHeader = ({
-    data
+    data,
+    onAddCard
 }: ListHeaderProps) => {
 
-    const { boardId } = useParams();
+    const params = useParams();
 
     const [title, setTitle] = useState(data.title);
     const [isEditing, setIsEditing] = useState(false);
@@ -60,6 +62,7 @@ export const ListHeader = ({
     const onSubmit = (formData: FormData) => {
         const title = formData.get("title") as string;
         const id = formData.get("id") as string;
+        const boardId = params.boardId as string;
 
         if (title === data.title) {
             disableEditing();
@@ -111,7 +114,7 @@ export const ListHeader = ({
                 </div>
             )}
 
-            <ListOptions data={data} onAddCard={() => { }} />
+            <ListOptions data={data} onAddCard={onAddCard} />
 
         </div>
     )

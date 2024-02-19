@@ -3,7 +3,7 @@
 import { useFormStatus } from "react-dom";
 
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 interface FormSubmitProps {
     children: React.ReactNode;

@@ -12,7 +12,7 @@ import { createBoard } from "@/actions/create-board";
 import { FormInput } from "./input";
 import { FormSubmit } from "./submit";
 import { X } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { FormPicker } from "./picker";
 import { ElementRef, useRef } from "react";
