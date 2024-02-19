@@ -10,6 +10,11 @@ import {
     Droppable
 } from "@hello-pangea/dnd";
 import { reorder } from "@/lib/reorder";
+import { useAction } from "@/hooks/useAction";
+import { updateCardOrder } from "@/actions/update-card-order";
+import { toast } from "sonner";
+import { updateListOrder } from "@/actions/update-list-order";
+import { useParams } from "next/navigation";
 
 interface ListContainerProps {
     data: ListWithCards[];
@@ -20,6 +25,26 @@ export const ListContainer = ({
     data,
     boardId
 }: ListContainerProps) => {
+
+    const params = useParams();
+
+    const { execute: executeCardsOrder } = useAction(updateCardOrder, {
+        onSuccess: (data) => {
+            toast.success(`Card reordered`);
+        },
+        onError: (err) => {
+            toast.error(err);
+        }
+    })
+
+    const { execute: executeListOrder } = useAction(updateListOrder, {
+        onSuccess: (data) => {
+            toast.success(`List reordered`);
+        },
+        onError: (err) => {
+            toast.error(err);
+        }
+    })
 
     /**
      * putting the data prop into state gives us an optimistic mutation updates whenever we are dealing 
@@ -36,6 +61,7 @@ export const ListContainer = ({
 
     const onDragEnd = (result: any) => {
         console.log(result);
+        const boardId = params.boardId as string;
         const { destination, source, type } = result;
 
         if (!destination) {
@@ -61,6 +87,7 @@ export const ListContainer = ({
             setOrderedData(items);
 
             // todo: use server action to persist it in DB
+            executeListOrder({ items, boardId });
         }
 
         // if card is being drag and dropped
@@ -97,6 +124,7 @@ export const ListContainer = ({
 
                 setOrderedData(newOrderedData);
                 // todo: use server action to persist it in DB
+                executeCardsOrder({ items: reorderedCards, boardId });
             } else {
                 // remove card from sourceList
                 const [movedCard] = sourceList.cards.splice(source.index, 1);
@@ -116,6 +144,7 @@ export const ListContainer = ({
 
                 setOrderedData(newOrderedData);
                 // todo: use server action to persist it in DB
+                executeCardsOrder({ items: destinationList.cards, boardId });
             }
         }
     }
