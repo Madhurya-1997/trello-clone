@@ -8,7 +8,7 @@ import { CardWithList } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Layout } from "lucide-react";
 import { useParams } from "next/navigation";
-import { ElementRef, useRef, useState } from "react";
+import { ElementRef, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 interface HeaderProps {
