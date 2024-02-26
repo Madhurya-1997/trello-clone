@@ -2,6 +2,7 @@
 
 import { CardModal } from "@/components/modals/card-modal";
 import { useEffect, useState } from "react";
+import { PremiumModal } from "@/components/modals/premiumModal";
 
 export const ModalProvider = () => {
 
@@ -17,6 +18,7 @@ export const ModalProvider = () => {
     return (
         <>
             <CardModal />
+            <PremiumModal />
         </>
     )
 }

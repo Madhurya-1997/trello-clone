@@ -1,4 +1,6 @@
-## Trello Clone
+## TaskHub
+
+- B2B task management system
 
 #### Tech stack used:
 - Nextjs 14
@@ -6,6 +8,6 @@
 - Server Actions
 - Prisma ORM
 - MySQL DB
-- Stripe (yet to use)
-- Docker (yet to use)
+- Stripe 
+- Docker (to be added)
 

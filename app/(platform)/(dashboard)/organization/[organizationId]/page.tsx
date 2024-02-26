@@ -2,12 +2,15 @@ import { Separator } from "@/components/ui/separator";
 import { Information } from "./_components/Information";
 import { BoardList } from "./_components/BoardList";
 import { Suspense } from "react";
+import { checkSubscription } from "@/lib/subscription";
 
-export default function OrganizationIdPage() {
+export default async function OrganizationIdPage() {
+
+    const isPremium = await checkSubscription();
 
     return (
         <div className="w-full mb-20">
-            <Information />
+            <Information isPremium={isPremium} />
             <Separator className="my-4" />
 
             <div className="px-2 md:px-4">

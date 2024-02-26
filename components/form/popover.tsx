@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { FormPicker } from "./picker";
 import { ElementRef, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { usePremiumModal } from "@/hooks/usePremiumModal";
 
 
 interface FormPopoverProps {
@@ -33,6 +34,8 @@ export const FormPopover = ({
     sideOffset = 0
 }: FormPopoverProps) => {
 
+    const premiumModal = usePremiumModal();
+
     const closeRef = useRef<ElementRef<"button">>(null);
     const router = useRouter();
 
@@ -44,6 +47,7 @@ export const FormPopover = ({
         },
         onError: (error) => {
             toast.error(error);
+            premiumModal.onOpen();
         }
     });
 

@@ -6,11 +6,11 @@ import { CreditCard } from "lucide-react";
 import Image from "next/image";
 
 interface InformationProps {
-
+    isPremium: boolean;
 }
 
 export const Information = ({
-
+    isPremium
 }: InformationProps) => {
 
     const { organization, isLoaded } = useOrganization();
@@ -38,7 +38,7 @@ export const Information = ({
 
                 <div className="flex items-center text-xs text-muted-foreground">
                     <CreditCard className="h-3 w-3 mr-1" />
-                    Free
+                    {isPremium ? "Premium" : "Free"}
                 </div>
             </div>
         </div>
